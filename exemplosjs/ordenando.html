@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="ordenando.js"></script>
+    <title>Document</title>
+</head>
+<body style="margin-left: 10px;">
+    <h1>Ordenando Valores</h1>
+
+    <div> 
+        <label> Valor </label>
+        <br>
+        <input type="number" id="valor"> 
+        <br>
+        <button style="margin-top: 5px;" type="button" class="btn btn-primary" onclick="add()">Adicionar</button>
+    </div>
+    <hr>
+    <select id="funcao" name="funcao">
+        <option value="Blubble Sort">Blubble Sort</option>
+        <option value="Selection Sort">Selection Sort</option>
+        <option value="Quick Sort"> Quick Sort</option>
+    </select>
+    <br>
+    <div style="display: flex;">
+    <button style="margin: 5px;" type="button" class="btn btn-primary" onclick="ordenar()"> Ordenar </button>    
+    <button style="margin: 5px;" type="button" class="btn btn-primary" onclick="misturar()"> Misturar </button> 
+    </div>
+    <hr>
+    <ul id="valores"></ul> 
+
+</body>
+
+<script > 
+
+//import {bubble_sort} from 'ordenando.js'
+
+function add() {
+    //alert('funcao add');
+    let inserido = document.getElementById('valor').value;
+    //let lista_valores = document.getElementById('valores').value;
+    let para = document.createElement('li');
+    let node = document.createTextNode(inserido);
+    para.appendChild(node);
+    let element = document.getElementById("valores");
+    element.appendChild(para);
+};
+
+function ordenar() {
+    let vet5 = [];
+    let collection = document.getElementById("valores").children;
+    let text = "";
+    for (let i = 0; i < collection.length; i++) {
+    text += collection[i].textContent;
+    vet5.push(parseInt(collection[i].textContent, 10));
+    };  
+    let escolha = document.getElementById('funcao').value;
+    if (escolha == 'Blubble Sort'){
+       let listanova = bubble_sort(vet5);
+       listanova.map((p, ind) => document.getElementsByTagName('li')[ind].innerHTML = p);
+    } else if (escolha == 'Selection Sort') {
+        let listanova = selectionSort(vet5);
+        listanova.map((p, ind) => document.getElementsByTagName('li')[ind].innerHTML = p);
+    } else if (escolha == 'Quick Sort') {
+        let listanova = selectionSort(vet5);
+        listanova.map((p, ind) => document.getElementsByTagName('li')[ind].innerHTML = p);
+    };   
+};
+
+function misturar() {
+    let vet5 = [];
+    let collection = document.getElementById("valores").children;
+    let text = "";
+    for (let i = 0; i < collection.length; i++) {
+    text += collection[i].textContent;
+    vet5.push(parseInt(collection[i].textContent, 10));
+    };  
+    let misturado = shuffle(vet5);
+    misturado.map((m, ind) => document.getElementsByTagName('li')[ind].innerHTML = m);
+};
+
+</script>
+</html>
